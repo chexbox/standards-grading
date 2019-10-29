@@ -1,0 +1,142 @@
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap');
+:root {
+	--light-grey: #cccccc;
+	--grey: #adadad;
+	--dark-grey: #333333;
+	--green: #0cad2c;
+	--green-light: #0ecc34;
+	--blue: #0c8dad;
+	--blue-light: #0ea6cc;
+}
+body {
+	font-family: 'Source Sans Pro', sans-serif;
+	margin: 0;
+	padding: 0;
+	text-align: center;
+}
+
+a {
+	font-family: 'Source Sans Pro', sans-serif;
+	color: var(--green);
+}
+
+button {
+	border-style: solid;
+	margin: 0.5em;
+	padding: 0;
+	overflow: auto;
+	border-width: 0.25em;
+	border-radius: 1em;
+}
+.lonely {
+	text-decoration: none;
+	margin: 0.5em;
+	padding: 1em;
+}
+ul {
+	list-style-type: none;
+	margin: 0.5em;
+	padding: 0;
+	overflow: auto;
+}
+li {
+	margin: 0.5em;
+	padding: 0.5em;
+	overflow: auto;
+	border-style: solid;
+	border-width: 0.25em;
+	border-radius: 1em;
+	background-color: lightgrey;
+	color: black;
+}
+li input {
+	width: 2em;
+}
+li .title {
+	width: calc(100% - 10em)
+}
+li .remove {
+	margin: 0.5em;
+	padding: 0.5em;
+	background-color: inherit;
+	color: inherit;
+	border-color: inherit;
+	cursor: pointer;
+}
+@media screen {
+	li:nth-child(odd) {
+		background-color: var(--green);
+		border-color: var(--green-light);
+		color: white;
+	}
+	li:nth-child(even) {
+		background-color: var(--blue);
+		border-color: var(--blue-light);
+		color: white;
+	}
+	li:last-child {
+		background-color: var(--grey);
+		border-color: var(--light-grey);
+		color: white;
+		cursor: pointer;
+	}
+}
+.half {
+	width: calc(50% - 1em);
+	height: calc(100% - 1em);
+	position: relative;
+}
+			
+.left {
+	float: left;
+}
+.right {
+	float: right;
+}
+.full {
+	text-decoration: none;
+	margin: 0;
+	padding: 0;
+	color: inherit;
+}
+.full h1, .full div {
+	margin: 1em;
+}
+@media screen {
+	.green {
+		background-color: var(--green);
+		border-color: var(--green-light);
+		color: white;
+	}
+	.blue {
+		background-color: var(--blue);
+		border-color: var(--blue-light);
+		color: white;
+	}
+	body {
+		background-color: var(--dark-grey);
+		color: white;
+	}
+}
+table {
+	border-collapse: collapse;
+	margin: 1em;
+}
+th, td {
+	border: 1px solid white;
+	padding: 0.5em;
+} 
+.hidden {
+	display: none;
+	visibility: hidden;
+}
+.underline {
+	text-decoration: underline;
+	color: var(--green);
+}
+footer {
+	margin: 0.5em;
+	padding: 0.5em;
+}
+@media only screen and (max-width: 600px) {
+}

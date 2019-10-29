@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Calculate a Strand Score</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" type="text/css" href="style.css">
+		<script>
+			function addItem(){
+				let list = document.getElementById("data");
+				let itm = document.createElement("li");
+				itm.innerHTML = '<div class="score left">Score: <input type="number" min=1 max=4 /></div><div contenteditable class="title left">Assignment Name...</div></div><button onclick="removeItem(this)" class="remove right">x</button>';
+				list.insertBefore(itm, list.children[list.children.length-1]);
+				
+			}
+			function removeItem(e){
+				console.log(e);
+				e.parentNode.remove();
+			}
+			function calculateScore(){
+				let list = document.getElementById("data").children;
+				let scores = []
+				for (let i = 0; i<list.length-1; i++){
+					scores.push(Number(list[i].children[0].children[0].value));
+				}
+				for (let i = 0; i<scores.length; i++){
+					if (scores[i]<1 || scores[i]>4){
+						i -= 1;
+						scores.splice(i+1, 1);
+					}
+				}
+				console.log(scores);
+				if (scores.length){
+					let sum = scores.reduce(function(a, b) { return a + b; });
+					let score = sum / scores.length;
+					let avg = Math.round(score*1000)/1000;
+					document.getElementById("avg").innerHTML=avg;
+					document.getElementById("finalscore").innerHTML=Math.round(score);
+					document.getElementById("result").classList.remove("hidden");
+				}
+			}
+		</script>
+	</head>
+
+
+	<body>
+		<h1>Standards Based Grading Calculator</h1>
+		<h3>Calculate a Strand Score</h3>
+		<ul id="data">
+			<li><div class="score left">Score: <input type="number" min=1 max=4 /></div><div contenteditable class="title left">Assignment Name...</div></div><button onclick="removeItem(this)" class="remove right">x</button></li>
+			<li onclick="addItem()">Add Assignment</li>
+		</ul>
+		<button class="blue lonely" onclick="calculateScore()">Get Strand Score</button>
+		<div id="result" class="hidden"><div>Your average is <span id="avg">0</span>. Thus, your strand score is <h3 id="finalscore">0</h3></div></div>
+		<footer>Made with <img src="heart.svg" style="height:1em;"> by <a href="github.com/chexbox/">Chexbox</a> for <img src="cf.svg" style="height:1em;">. <br> &copy; 2019</footer>
+	</body>
+</html>
+ 

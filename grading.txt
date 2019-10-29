@@ -1,0 +1,27 @@
+A
+All 4s
+Mostly 4s
+No 2 or 1s
+
+B
+Mostly 3s with at least one 4 with no 2 or 1s
+or
+Mostly 4s with at most one 2
+
+C
+All 3s
+Mostly 3s
+No 1s
+
+D
+All 2s
+Mostly 2s
+
+F
+All 1s
+Mostly 1s
+
+4 Exemplary
+3 Proficient
+2 Developing
+1 Beginning
