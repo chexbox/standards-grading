@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Calculate a Class Score</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" type="text/css" href="style.css">
+		<script>
+			function addItem(){
+				let list = document.getElementById("data");
+				let itm = document.createElement("li");
+				itm.innerHTML = '<div class="score left">Score: <input type="number" min=1 max=4 /></div><div contenteditable class="title left">Strand Name...</div></div><button onclick="removeItem(this)" class="remove right">x</button>';
+				list.insertBefore(itm, list.children[list.children.length-1]);
+				
+			}
+			function removeItem(e){
+				console.log(e);
+				e.parentNode.remove();
+			}
+			function calculateScore(){
+				let list = document.getElementById("data").children;
+				let scores = []
+				for (let i = 0; i<list.length-1; i++){
+					scores.push(Number(list[i].children[0].children[0].value));
+				}
+				for (let i = 0; i<scores.length; i++){
+					if (scores[i]<1 || scores[i]>4){
+						i -= 1;
+						scores.splice(i+1, 1);
+					}
+				}
+				console.log(scores);
+				if (!(scores.length)){
+					return;
+				}
+				let strands = scores.length;
+				let one = 0;
+				let two = 0;
+				let three = 0;
+				let four = 0;
+				for (let i = 0; i < strands; i++){
+					if (scores[i] == 1){
+						one++;
+					}
+					if (scores[i] == 2){
+						two++;
+					}
+					if (scores[i] == 3){
+						three++;
+					}
+					if (scores[i] == 4){
+						four++;
+					}
+				}
+				if (four==strands){ //all 4s, no 2s/1s
+					finalStrand("A", "a4");
+					return;
+				}
+				if (four > (strands/2) && two==0 && one==0){ //mostly 4s, no 2s/1s
+					finalStrand("A", "m4");
+					return;
+				}
+				if (four > (strands/2) && two<=1 && one==0){ //mostly 4s, with a 2
+					finalStrand("B", "m4w2");
+					return;
+				}
+				if (four > 1 && 3 > (strands/2) && two==0 && one==0){ //mostly 3s, with a 4
+					finalStrand("B", "m3");
+					return;
+				}
+				if (three==strands){ //all threes
+					finalStrand("C", "a3");
+					return;
+				}
+				if (three+four > (strands/2) && one==0){ //mostly 3s, with no 1
+					finalStrand("C", "m3n1");
+					return;
+				}
+				if (two == strands){ //all 2s
+					finalStrand("D", "a2");
+					return;
+				}
+				if (two+three+four > (strands/2)){ //mostly 2s
+					finalStrand("D", "m2");
+					return;
+				}
+				if (one == strands){ //all 1s
+					finalStrand("F", "a1");
+					return;
+				}
+				if (one+two+three+four > (strands/2)){ //mostly 1s
+					finalStrand("F", "m1");
+					return;
+				}
+			}
+			function finalStrand(grade, reason){
+				let ids=["A", "B", "C", "D", "F", "a4", "m4", "m4w2", 
+				"m3", "a3", "m3n1", "a2", "m2", "a1", "m1"];
+				for (let i = 0; i< ids.length-1; i++){
+					document.getElementById(ids[i]).classList.remove("underline");
+				}
+				console.log(grade, reason);
+				document.getElementById(grade).classList.add("underline");
+				document.getElementById(reason).classList.add("underline");
+			}
+		</script>
+	</head>
+
+
+	<body>
+		<h1>Standards Based Grading Calculator</h1>
+		<h3>Calculate a Class Grade</h3>
+		<ul id="data">
+			<li><div class="score left">Score: <input type="number" min=1 max=4 /></div><div contenteditable class="title left">Strand Name...</div></div><button onclick="removeItem(this)" class="remove right">x</button></li>
+			<li onclick="addItem()">Add Strand</li>
+		</ul>
+		<button class="blue lonely" onclick="calculateScore()">Get Strand Score</button>
+		<table>  
+			<tr>
+				<th id="A">A</th>
+				<th id="B">B</th>
+				<th id="C">C</th>
+				<th id="D">D</th>
+				<th id="F">F</th>
+			</tr>
+			<tr>
+				<td><div id="a4">All 4s</div> or <div id="m4">Mostly 4s and no 2s or 1s</div></td>
+				<td><div id="m4w2">Mostly 4s with at most one 2</div> or <div id="m3">Mostly 3s with at least one 4</div></td>
+				<td><div id="a3">All 3s</div> or <div id="m3n1">Mostly 3s and no 1s</div></td>
+				<td><div id="a2">All 2s</div> or <div id="m2">Mostly 2s</div></td>
+				<td><div id="a1">All 1s</div> or <div id="m1">Mostly 1s</div></td>
+			</tr>
+		</table>
+		<footer>Made with <img src="heart.svg" style="height:1em;"> by <a href="github.com/chexbox/">Chexbox</a> for <img src="cf.svg" style="height:1em;">. <br> &copy; 2019</footer>
+	</body>
+</html>
+ 
